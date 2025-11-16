@@ -127,8 +127,8 @@ def get_user_input() -> Tuple[str, int, int]:
     print(f"[INFO] Sheet ID: {sheet_id}")
 
     # 시작 행 입력
-    start_input = input("\n시작 행 (기본값 3):\n> ").strip()
-    start_row = int(start_input) if start_input else 3
+    start_input = input("\n시작 행 (기본값 2):\n> ").strip()
+    start_row = int(start_input) if start_input else 2
 
     # 종료 행 입력
     end_input = input("\n종료 행 (0=끝까지):\n> ").strip()
