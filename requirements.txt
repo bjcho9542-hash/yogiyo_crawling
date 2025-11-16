@@ -1,0 +1,14 @@
+# 요기요 입점 여부 조회 매크로 - 필수 패키지
+
+# Selenium & ChromeDriver
+selenium==4.27.1
+webdriver-manager==4.0.2
+
+# Google Sheets API
+google-api-python-client==2.154.0
+google-auth==2.36.0
+google-auth-oauthlib==1.2.1
+google-auth-httplib2==0.2.0
+
+# 환경 변수 관리
+python-dotenv==1.0.1

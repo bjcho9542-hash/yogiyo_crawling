@@ -1,0 +1,10 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git add:*)",
+      "Bash(git commit -m \"$(cat <<''EOF''\nAdd Naver crawling analysis reference document\n\n네이버 전화번호 검색 프로그램 상세 분석 자료 추가\n- 기술 스택 및 파일 구조 분석\n- 크롤링 로직 및 주소 매칭 전략\n- GUI 설계 및 EXE 빌드 방법\n- 요기요 크롤링 적용 시 고려사항 정리\n\n🤖 Generated with [Claude Code](https://claude.com/claude-code)\n\nCo-Authored-By: Claude <noreply@anthropic.com>\nEOF\n)\")"
+    ],
+    "deny": [],
+    "ask": []
+  }
+}
