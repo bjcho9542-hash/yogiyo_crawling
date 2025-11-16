@@ -118,16 +118,35 @@ class YogiyoChecker:
             button.click()
             print("[INFO] 조회 버튼 클릭")
 
-            # 3. 결과 로딩 대기
-            time.sleep(config.BUTTON_CLICK_WAIT)
+            # 3. 결과 메시지 대기 (WebDriverWait 사용)
+            # 메시지가 나타나고 텍스트가 있을 때까지 최대 10초 대기
+            message_element = None
+            for attempt in range(3):
+                time.sleep(config.BUTTON_CLICK_WAIT)
+                try:
+                    message_element = self.safe_find_element(
+                        config.MESSAGE_SELECTORS,
+                        "결과 메시지 영역"
+                    )
+                    message_text = message_element.text.strip()
 
-            # 4. 결과 메시지 추출
-            message_element = self.safe_find_element(
-                config.MESSAGE_SELECTORS,
-                "결과 메시지 영역"
-            )
-            message_text = message_element.text.strip()
-            print(f"[INFO] 결과 메시지: {message_text}")
+                    # 텍스트가 있고 유효한 메시지인지 확인
+                    if message_text and len(message_text) > 5:
+                        print(f"[INFO] 결과 메시지: {message_text}")
+                        break
+                    else:
+                        print(f"[DEBUG] 메시지 비어있음 또는 너무 짧음, 재시도 {attempt + 1}/3")
+                        if attempt < 2:
+                            time.sleep(2)
+                except Exception as e:
+                    print(f"[DEBUG] 메시지 찾기 실패 (시도 {attempt + 1}/3): {e}")
+                    if attempt < 2:
+                        time.sleep(2)
+                    else:
+                        raise
+
+            if not message_element or not message_text:
+                raise Exception("결과 메시지를 찾을 수 없거나 비어있습니다")
 
             # 5. 메시지 분류
             status, message = self.classify_message(message_text)

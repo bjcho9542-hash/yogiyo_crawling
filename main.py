@@ -90,6 +90,25 @@ def print_header():
     print()
 
 
+def extract_sheet_id(url_or_id: str) -> str:
+    """
+    URL 또는 ID에서 Sheet ID 추출
+
+    Args:
+        url_or_id: 전체 URL 또는 Sheet ID
+
+    Returns:
+        추출된 Sheet ID
+    """
+    # URL에서 ID 추출 패턴: /d/{SHEET_ID}/
+    match = re.search(r'/d/([a-zA-Z0-9-_]+)', url_or_id)
+    if match:
+        return match.group(1)
+
+    # URL이 아니면 그대로 반환 (이미 ID인 경우)
+    return url_or_id
+
+
 def get_user_input() -> Tuple[str, int, int]:
     """
     사용자 입력 받기
@@ -97,11 +116,15 @@ def get_user_input() -> Tuple[str, int, int]:
     Returns:
         (sheet_id, start_row, end_row) 튜플
     """
-    # Sheet ID 입력
-    sheet_id = input("조회할 Google 스프레드시트 ID를 입력하세요:\n> ").strip()
+    # Sheet URL 입력
+    sheet_url = input("조회할 Google 스프레드시트 URL 전체를 입력하세요:\n> ").strip()
 
-    if not sheet_id:
-        raise ValueError("Sheet ID가 비어있습니다!")
+    if not sheet_url:
+        raise ValueError("스프레드시트 URL이 비어있습니다!")
+
+    # URL에서 ID 추출
+    sheet_id = extract_sheet_id(sheet_url)
+    print(f"[INFO] Sheet ID: {sheet_id}")
 
     # 시작 행 입력
     start_input = input("\n시작 행 (기본값 3):\n> ").strip()
@@ -337,10 +360,6 @@ def main():
         # 브라우저 종료
         if checker:
             checker.close()
-
-        # 임시 파일 정리
-        if sheets_client:
-            sheets_client.cleanup()
 
         # 최종 요약
         print_summary(stats)

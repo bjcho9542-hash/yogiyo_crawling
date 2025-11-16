@@ -27,9 +27,7 @@ class GoogleSheetsClient:
             if not os.path.exists(creds_file):
                 raise FileNotFoundError(
                     f"\n[ERROR] credentials.json 파일을 찾을 수 없습니다!\n\n"
-                    f"Google Cloud Console에서 Service Account JSON 파일을 다운로드하여\n"
-                    f"프로젝트 루트에 'credentials.json'으로 저장하세요.\n\n"
-                    f"참고: 네이버 크롤링 프로젝트의 credentials.json을 복사해도 됩니다."
+                    f"프로젝트 루트에 'credentials.json' 파일이 필요합니다.\n"
                 )
 
             # Service Account 인증

@@ -28,9 +28,12 @@ BUTTON_SELECTORS = [
 ]
 
 MESSAGE_SELECTORS = [
-    'div.sc-hHLeRK.gpWodO',                                    # Primary
+    'div.sc-hHLeRK.gpWodO',                                    # Primary (오류 메시지 - 빨강/주황)
+    'div[class*="ValidMessage"]',                              # Success (입점 가능 - 초록)
     'div.sc-hHLeRK',                                           # Backup 1
-    'div[class*="sc-hHLeRK"]'                                  # Backup 2
+    'div[class*="sc-hHLeRK"]',                                 # Backup 2
+    'div[class*="gpWodO"]',                                    # Backup 3
+    'div[class*="eHHFZa"]'                                     # Backup 4 (입점 가능)
 ]
 
 # 스프레드시트 열 위치
